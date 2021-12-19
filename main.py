@@ -28,15 +28,16 @@ def find_password():
     try:
         with open("data.json", "r") as file:
             data = json.load(file)        
-    except:
+    except FileNotFoundError:
         tkinter.messagebox.showwarning(title="FILE NOT FOUND", message="No data file found")
     else:
         search_website = website_input.get()
         if search_website not in data:
-            tkinter.messagebox.showerror(title="Website not found", message="No details for the website exists.")
+            tkinter.messagebox.showerror(title="Website not found", message=f"No details for the {search_website} exists.")
         else:
+            email = data[search_website]["email"]
             password = data[search_website]["password"]
-            tkinter.messagebox.showinfo(title="Website details", message=f"Website: {search_website}\nPassword: {password}")
+            tkinter.messagebox.showinfo(title="Website details", message=f"Email: {email}\nPassword: {password}")
 
     
 # ---------------------------- SAVE PASSWORD ------------------------------- #

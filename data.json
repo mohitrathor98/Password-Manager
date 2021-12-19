@@ -1,10 +1,14 @@
 {
-    "amazon": {
-        "email": "as",
-        "password": "pass"
+    "Amazon": {
+        "email": "mohit@demo.com",
+        "password": "0wS)+&R4VPH1TV"
     },
     "Netflix": {
         "email": "mohit@demo.com",
-        "password": "net@34"
+        "password": "7+v1#BdnC%aHDyE"
+    },
+    "Hotstar": {
+        "email": "mohit@demo.com",
+        "password": "+LGr27Lgm*rK"
     }
 }

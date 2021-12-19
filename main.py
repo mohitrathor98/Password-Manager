@@ -42,12 +42,17 @@ def save():
             "password": password_input.get()
         }
     }
-    with open("data.json", 'r') as file:
-        file_data = json.load(file)
-        file_data.update(data)
-        
-    with open("data.json", "w") as file:    
-        json.dump(file_data, file, indent=4)     
+    
+    try:
+        with open("data.json", 'r') as file:
+            file_data = json.load(file)
+            file_data.update(data)
+    except FileNotFoundError:    
+        with open("data.json", "w") as file:    
+            json.dump(data, file, indent=4)
+    else:
+        with open("data.json", "w") as file:
+            json.dump(file_data, file, indent=4)     
         
     # clearing all text boxes
     website_input.delete(0, 'end')

@@ -1,9 +1,20 @@
 import tkinter
-import csv
+import tkinter.messagebox
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
+    
+    if len(website_input.get()) == 0 or len(password_input.get()) == 0:
+        tkinter.messagebox.showwarning(title="Fields empty", message="OOPS! some fields are empty")
+        return
+    
+    message = f"These are the details entered:\nEmail: {email_input.get()}\nPassword: {password_input.get()}\nIs it ok to save?"
+    is_ok = tkinter.messagebox.askokcancel(title=website_input.get(), message=message)
+    
+    if not is_ok:
+        return
+    
     data = f"{website_input.get()}, {email_input.get()}, {password_input.get()}\n"
     with open("data.csv", 'a') as file:
         file.write(data)      

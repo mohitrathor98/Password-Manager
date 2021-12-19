@@ -21,8 +21,24 @@ def generate():
     password_input.delete(0, END)
     password_input.insert(0, password)
     pyperclip.copy(password)
+    
+# ---------------------------- FIND PASSWORD ------------------------------- #
+def find_password():
+    
+    try:
+        with open("data.json", "r") as file:
+            data = json.load(file)        
+    except:
+        tkinter.messagebox.showwarning(title="FILE NOT FOUND", message="No data file found")
+    else:
+        search_website = website_input.get()
+        if search_website not in data:
+            tkinter.messagebox.showerror(title="Website not found", message="No details for the website exists.")
+        else:
+            password = data[search_website]["password"]
+            tkinter.messagebox.showinfo(title="Website details", message=f"Website: {search_website}\nPassword: {password}")
 
-
+    
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
     
@@ -82,9 +98,9 @@ password_label.grid(column=0, row=3)
 
 
 # inputs
-website_input = tkinter.Entry(width=40)
+website_input = tkinter.Entry(width=20)
 website_input.focus()
-website_input.grid(column=1, row=1, columnspan=2)
+website_input.grid(column=1, row=1)
 
 email_input = tkinter.Entry(width=40)
 email_input.insert(0, "mohit@demo.com")
@@ -97,7 +113,11 @@ password_input.grid(column=1, row=3)
 generate_password = tkinter.Button(text="Generate Password", command=generate)
 generate_password.grid(column=2, row=3)
 
-add_button = tkinter.Button(text="Add", width=38, command=save)
+add_button = tkinter.Button(text="Add", width=36, command=save)
 add_button.grid(column=1, row=4, columnspan=2, pady=5)
+
+search_button = tkinter.Button(text="Search", width=15, command=find_password)
+search_button.grid(column=2, row=1)
+
 
 window.mainloop()

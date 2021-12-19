@@ -1,0 +1,10 @@
+{
+    "amazon": {
+        "email": "as",
+        "password": "pass"
+    },
+    "Netflix": {
+        "email": "mohit@demo.com",
+        "password": "net@34"
+    }
+}

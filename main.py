@@ -3,6 +3,7 @@ from tkinter.constants import END
 import tkinter.messagebox
 import random
 import pyperclip
+import json
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -35,9 +36,18 @@ def save():
     if not is_ok:
         return
     
-    data = f"{website_input.get()}, {email_input.get()}, {password_input.get()}\n"
-    with open("data.csv", 'a') as file:
-        file.write(data)      
+    data = {
+        website_input.get():{
+            "email": email_input.get(),
+            "password": password_input.get()
+        }
+    }
+    with open("data.json", 'r') as file:
+        file_data = json.load(file)
+        file_data.update(data)
+        
+    with open("data.json", "w") as file:    
+        json.dump(file_data, file, indent=4)     
         
     # clearing all text boxes
     website_input.delete(0, 'end')
